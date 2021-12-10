@@ -17,7 +17,7 @@ view: vw_order_details {
   }
   
   dimension: created_at_year {
-    type: date_month_name
+    type: date_year
     sql: ${TABLE}.created_at ;;
   }
   
@@ -30,5 +30,15 @@ view: vw_order_details {
     sql: (FORMAT_TIMESTAMP('%Y/%m', vw_order_details.created_at )) ;;
   }
   
+  
+  dimension: sale_price {
+    type: number
+    sql: ${TABLE}.sale_price ;;
+  }
+  
+  measure: tot_sale_price {
+    type: sum
+  value_format_name: decimal_0
+    sql: ${TABLE}.sale_price ;;
+  }
 }
-
