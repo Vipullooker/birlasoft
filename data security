@@ -1,0 +1,29 @@
+ACCESS Filter
+
+explore: customer {
+  access_filter: {
+    field: customer.name
+    user_attribute: allowed_customers
+  }
+  access_filter: {
+    field: product.department
+    user_attribute: allowed_departments
+  }
+}
+
+ALWAYS Filter
+
+explore: order {
+  always_filter: { 
+    filters: [id: "123", customer.id: "789"]
+  }
+  join: customer {
+    sql_on: ${order.customer_id} = ${customer.id} ;;
+  }
+}
+
+SQL always where
+
+explore: order {
+  sql_always_where: ${created_date} >= '2012-01-01' ;;
+}
